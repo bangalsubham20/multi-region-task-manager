@@ -1,3 +1,1 @@
-spring:
-  application:
-    name: taskmanager
+# Note: All Spring Boot configuration is consolidated in application.yml to prevent configuration file precedence conflicts.

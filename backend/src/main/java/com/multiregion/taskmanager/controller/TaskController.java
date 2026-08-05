@@ -3,6 +3,7 @@ package com.multiregion.taskmanager.controller;
 import com.multiregion.taskmanager.dto.ApiResponse;
 import com.multiregion.taskmanager.dto.TaskRequest;
 import com.multiregion.taskmanager.dto.TaskResponse;
+import com.multiregion.taskmanager.enums.TaskStatus;
 import com.multiregion.taskmanager.service.TaskService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -10,6 +11,10 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import com.multiregion.taskmanager.enums.Priority;
+import com.multiregion.taskmanager.enums.TaskStatus;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -33,16 +38,31 @@ public class TaskController {
         );
     }
 
-    @Operation(summary = "Get all tasks")
-    @GetMapping
-    public ApiResponse<List<TaskResponse>> getAllTasks() {
+    @Operation(summary = "Get tasks with pagination, sorting and filtering")
+@GetMapping("/search")
+public ApiResponse<Page<TaskResponse>> searchTasks(
 
-        return new ApiResponse<>(
-                true,
-                "Tasks fetched successfully",
-                taskService.getAllTasks()
-        );
-    }
+        @RequestParam(required = false) String title,
+
+        @RequestParam(required = false) TaskStatus status,
+
+        @RequestParam(required = false) Priority priority,
+
+        @RequestParam(defaultValue = "0") int page,
+
+        @RequestParam(defaultValue = "5") int size,
+
+        @RequestParam(defaultValue = "id") String sortBy,
+
+        @RequestParam(defaultValue = "asc") String sortDir
+) {
+
+    return new ApiResponse<>(
+            true,
+            "Tasks fetched successfully",
+            taskService.getTasks(title, status, priority, page, size, sortBy, sortDir)
+    );
+}
 
     @Operation(summary = "Get task by ID")
     @GetMapping("/{id}")
