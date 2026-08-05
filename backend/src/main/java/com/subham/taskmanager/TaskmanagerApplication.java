@@ -1,13 +1,5 @@
+// Package deprecated - main entry point moved to com.multiregion.taskmanager.MultiRegionTaskManagerApplication
 package com.subham.taskmanager;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-@SpringBootApplication
-public class TaskmanagerApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(TaskmanagerApplication.class, args);
-	}
-
-}
+// Unused placeholder
+class TaskmanagerApplicationPlaceholder {}
