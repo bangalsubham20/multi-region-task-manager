@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: ${SERVER_PORT:8080}
   servlet:
     context-path: /api/v1
 
@@ -12,9 +12,9 @@ spring:
 
   # Database Configuration (MySQL)
   datasource:
-    url: jdbc:mysql://localhost:3306/task_manager?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
-    username: root
-    password: rootpassword
+    url: ${DB_URL:jdbc:mysql://localhost:3306/task_manager?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true}
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:Maharani@99}
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   # JPA / Hibernate Configuration
@@ -32,4 +32,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: health, info, metrics
+        include: ["health", "info", "metrics"]
+  endpoint:
+    health:
+      show-details: always
