@@ -9,18 +9,17 @@ export default defineConfig({
     port: 5173,
     proxy: {
       '/tasks': {
-        target: 'http://localhost:8080',
+        target: 'http://localhost:8080/api/v1',
         changeOrigin: true,
       },
       '/system': {
-        target: 'http://localhost:8080',
+        target: 'http://localhost:8080/api/v1',
         changeOrigin: true,
       },
       '/actuator': {
-        target: 'http://localhost:8080',
+        target: 'http://localhost:8080/api/v1',
         changeOrigin: true,
       },
-
     },
   },
 })
