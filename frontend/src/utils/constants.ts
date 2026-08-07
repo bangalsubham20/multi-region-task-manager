@@ -1,10 +1,10 @@
 import type { Priority, TaskStatus, Region } from '../types';
 
 export const REGIONS: Region[] = [
-  { id: 'us-east-1', name: 'US East (N. Virginia)', flag: '🇺🇸', status: 'Healthy', ping: '24ms' },
-  { id: 'eu-west-1', name: 'EU West (Ireland)', flag: '🇪🇺', status: 'Healthy', ping: '85ms' },
-  { id: 'ap-south-1', name: 'AP South (Mumbai)', flag: '🇮🇳', status: 'Healthy', ping: '110ms' },
-  { id: 'ap-northeast-1', name: 'AP Northeast (Tokyo)', flag: '🇯🇵', status: 'Healthy', ping: '142ms' },
+  { id: 'ap-south-1', name: 'Asia Pacific (Mumbai 🇮🇳)', flag: '🇮🇳', status: 'Healthy', ping: '18ms' },
+  { id: 'eu-central-1', name: 'Europe (Frankfurt 🇩🇪)', flag: '🇩🇪', status: 'Healthy', ping: '92ms' },
+  { id: 'us-east-1', name: 'US East (N. Virginia 🇺🇸)', flag: '🇺🇸', status: 'Healthy', ping: '135ms' },
+  { id: 'ap-northeast-1', name: 'AP Northeast (Tokyo 🇯🇵)', flag: '🇯🇵', status: 'Healthy', ping: '148ms' },
 ];
 
 export const STATUS_COLORS: Record<TaskStatus, { bg: string; text: string; border: string }> = {

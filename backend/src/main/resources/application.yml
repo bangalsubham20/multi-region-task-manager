@@ -3,9 +3,14 @@ server:
   servlet:
     context-path: /api/v1
 
+system:
+  region: ${DEPLOYMENT_REGION:ap-south-1 (Mumbai)}
+  version: v0.0.1-SNAPSHOT
+
 spring:
   application:
     name: multi-region-task-manager
+
 
   profiles:
     active: dev

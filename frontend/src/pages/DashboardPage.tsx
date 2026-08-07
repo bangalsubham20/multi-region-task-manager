@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTasks } from '../hooks';
-import { StatsCards, TaskCard, TaskModal } from '../components';
+import { StatsCards, TaskCard, TaskModal, SystemStatusBar } from '../components';
 import type { Task, TaskRequest } from '../types';
+
 
 
 export const DashboardPage: React.FC = () => {
@@ -59,8 +60,12 @@ export const DashboardPage: React.FC = () => {
         </div>
       </div>
 
+      {/* System Live Metrics Bar */}
+      <SystemStatusBar />
+
       {/* Metrics Cards */}
       <StatsCards tasks={tasks} totalElements={pageInfo.totalElements} />
+
 
       {/* Recent Tasks Grid */}
       <div>
