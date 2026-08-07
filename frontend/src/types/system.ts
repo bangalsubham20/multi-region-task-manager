@@ -12,3 +12,12 @@ export interface SystemInfo {
   health: string;
   responseTimeMs?: number;
 }
+
+export interface TaskMetrics {
+  totalTasks: number;
+  completed: number;
+  todo: number;
+  inProgress: number;
+  highPriority: number;
+  lowPriority: number;
+}

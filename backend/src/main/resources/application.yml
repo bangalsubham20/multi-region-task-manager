@@ -3,9 +3,15 @@ server:
   servlet:
     context-path: /api/v1
 
-system:
-  active-region: ${DEPLOYMENT_REGION:ap-south-1}
+application:
+  region: ${AWS_REGION:ap-south-1}
+  environment: ${APP_ENV:development}
   version: 0.0.1-SNAPSHOT
+
+system:
+  active-region: ${AWS_REGION:ap-south-1}
+  version: 0.0.1-SNAPSHOT
+
 
 spring:
   application:

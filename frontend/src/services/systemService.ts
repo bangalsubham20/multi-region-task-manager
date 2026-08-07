@@ -1,5 +1,5 @@
 import { api } from '../api';
-import type { ApiResponse, SystemInfo } from '../types';
+import type { ApiResponse, SystemInfo, TaskMetrics } from '../types';
 
 export const systemService = {
   async getSystemInfo(): Promise<{ data: SystemInfo; latencyMs: number }> {
@@ -32,6 +32,22 @@ export const systemService = {
           responseTimeMs: latencyMs,
         },
         latencyMs,
+      };
+    }
+  },
+
+  async getTaskMetrics(): Promise<TaskMetrics> {
+    try {
+      const response = await api.get<ApiResponse<TaskMetrics>>('/system/metrics');
+      return response.data.data;
+    } catch {
+      return {
+        totalTasks: 0,
+        completed: 0,
+        todo: 0,
+        inProgress: 0,
+        highPriority: 0,
+        lowPriority: 0,
       };
     }
   },

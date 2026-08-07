@@ -1,6 +1,6 @@
-import React from 'react';
-import type { Task } from '../../types';
-
+import React, { useEffect, useState } from 'react';
+import type { Task, TaskMetrics } from '../../types';
+import { systemService } from '../../services/systemService';
 
 interface StatsCardsProps {
   tasks: Task[];
@@ -8,20 +8,28 @@ interface StatsCardsProps {
 }
 
 export const StatsCards: React.FC<StatsCardsProps> = ({ tasks, totalElements = 0 }) => {
-  const total = totalElements || tasks.length;
-  const pending = tasks.filter((t) => t.status === 'PENDING').length;
-  const inProgress = tasks.filter((t) => t.status === 'IN_PROGRESS').length;
-  const completed = tasks.filter((t) => t.status === 'COMPLETED').length;
+  const [metrics, setMetrics] = useState<TaskMetrics | null>(null);
+
+  useEffect(() => {
+    systemService.getTaskMetrics().then((m) => setMetrics(m));
+  }, [tasks]);
+
+  const total = metrics ? metrics.totalTasks : (totalElements || tasks.length);
+  const pending = metrics ? metrics.todo : tasks.filter((t) => t.status === 'PENDING').length;
+  const inProgress = metrics ? metrics.inProgress : tasks.filter((t) => t.status === 'IN_PROGRESS').length;
+  const completed = metrics ? metrics.completed : tasks.filter((t) => t.status === 'COMPLETED').length;
+  const highPriority = metrics ? metrics.highPriority : tasks.filter((t) => t.priority === 'HIGH' || t.priority === 'URGENT').length;
 
   const stats = [
     { label: 'Total Tasks', value: total, color: 'from-blue-500/20 to-indigo-500/10 border-indigo-500/30 text-indigo-400' },
-    { label: 'Pending', value: pending, color: 'from-amber-500/20 to-yellow-500/10 border-amber-500/30 text-amber-400' },
+    { label: 'Pending (Todo)', value: pending, color: 'from-amber-500/20 to-yellow-500/10 border-amber-500/30 text-amber-400' },
     { label: 'In Progress', value: inProgress, color: 'from-sky-500/20 to-cyan-500/10 border-sky-500/30 text-sky-400' },
     { label: 'Completed', value: completed, color: 'from-emerald-500/20 to-teal-500/10 border-emerald-500/30 text-emerald-400' },
+    { label: 'High Priority', value: highPriority, color: 'from-rose-500/20 to-red-500/10 border-rose-500/30 text-rose-400' },
   ];
 
   return (
-    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+    <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
       {stats.map((stat, idx) => (
         <div
           key={idx}

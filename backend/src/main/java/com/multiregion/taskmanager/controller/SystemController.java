@@ -2,6 +2,10 @@ package com.multiregion.taskmanager.controller;
 
 import com.multiregion.taskmanager.dto.ApiResponse;
 import com.multiregion.taskmanager.dto.SystemInfoResponse;
+import com.multiregion.taskmanager.dto.TaskMetricsResponse;
+import com.multiregion.taskmanager.enums.Priority;
+import com.multiregion.taskmanager.enums.TaskStatus;
+import com.multiregion.taskmanager.repository.TaskRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,27 +17,57 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.lang.management.ManagementFactory;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/system")
-@Tag(name = "System API", description = "System Information and Health Endpoints")
+@Tag(name = "System API", description = "System Information, Health, and Metrics Endpoints")
 public class SystemController {
 
     @Autowired(required = false)
     private BuildProperties buildProperties;
 
+    @Autowired
+    private TaskRepository taskRepository;
+
     @Value("${spring.application.name:Multi Region Task Manager}")
     private String applicationName;
 
-    @Value("${system.version:0.0.1-SNAPSHOT}")
+    @Value("${application.version:0.0.1-SNAPSHOT}")
     private String version;
 
-    @Value("${system.active-region:${DEPLOYMENT_REGION:ap-south-1}}")
+    @Value("${application.region:ap-south-1}")
     private String activeRegion;
 
-    @Value("${spring.profiles.active:dev}")
+    @Value("${application.environment:development}")
     private String environment;
+
+    @Operation(summary = "Get aggregate task metrics")
+    @GetMapping("/metrics")
+    public ApiResponse<TaskMetricsResponse> getTaskMetrics() {
+        long total = taskRepository.count();
+        long completed = taskRepository.countByStatus(TaskStatus.COMPLETED);
+        long pending = taskRepository.countByStatus(TaskStatus.PENDING);
+        long inProgress = taskRepository.countByStatus(TaskStatus.IN_PROGRESS);
+        long high = taskRepository.countByPriorityIn(List.of(Priority.HIGH, Priority.URGENT));
+        long low = taskRepository.countByPriorityIn(List.of(Priority.LOW, Priority.MEDIUM));
+
+        TaskMetricsResponse metrics = TaskMetricsResponse.builder()
+                .totalTasks(total)
+                .completed(completed)
+                .todo(pending)
+                .inProgress(inProgress)
+                .highPriority(high)
+                .lowPriority(low)
+                .build();
+
+        return new ApiResponse<>(
+                true,
+                "Task metrics fetched successfully",
+                metrics
+        );
+    }
 
     @Operation(summary = "Get detailed dynamic system information")
     @GetMapping("/info")
