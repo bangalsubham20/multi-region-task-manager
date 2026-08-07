@@ -4,12 +4,13 @@ server:
     context-path: /api/v1
 
 system:
-  region: ${DEPLOYMENT_REGION:ap-south-1 (Mumbai)}
-  version: v0.0.1-SNAPSHOT
+  active-region: ${DEPLOYMENT_REGION:ap-south-1}
+  version: 0.0.1-SNAPSHOT
 
 spring:
   application:
-    name: multi-region-task-manager
+    name: Multi Region Task Manager
+
 
 
   profiles:

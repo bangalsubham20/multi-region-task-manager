@@ -1,11 +1,11 @@
 import { api } from '../api';
-import type { ApiResponse, SystemStatus } from '../types';
+import type { ApiResponse, SystemInfo } from '../types';
 
 export const systemService = {
-  async getSystemStatus(): Promise<{ data: SystemStatus; latencyMs: number }> {
+  async getSystemInfo(): Promise<{ data: SystemInfo; latencyMs: number }> {
     const startTime = performance.now();
     try {
-      const response = await api.get<ApiResponse<SystemStatus>>('/system/status');
+      const response = await api.get<ApiResponse<SystemInfo>>('/system/info');
       const endTime = performance.now();
       const latencyMs = Math.round(endTime - startTime);
 
@@ -21,10 +21,14 @@ export const systemService = {
       const latencyMs = Math.round(endTime - startTime);
       return {
         data: {
-          region: 'ap-south-1 (Mumbai)',
-          version: 'v0.0.1-SNAPSHOT',
-          status: 'OFFLINE',
-          timestamp: Date.now(),
+          applicationName: 'Multi Region Task Manager',
+          version: '0.0.1-SNAPSHOT',
+          activeRegion: 'ap-south-1',
+          environment: 'dev',
+          javaVersion: '21',
+          serverTime: new Date().toISOString(),
+          uptime: 0,
+          health: 'OFFLINE',
           responseTimeMs: latencyMs,
         },
         latencyMs,

@@ -1,7 +1,7 @@
 package com.multiregion.taskmanager.controller;
 
 import com.multiregion.taskmanager.dto.ApiResponse;
-import com.multiregion.taskmanager.dto.SystemStatusResponse;
+import com.multiregion.taskmanager.dto.SystemInfoResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Value;
@@ -9,31 +9,52 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.lang.management.ManagementFactory;
+import java.time.LocalDateTime;
+
 @RestController
 @RequestMapping("/system")
-@Tag(name = "System API", description = "Operations for system health, region info, and version metrics")
+@Tag(name = "System API", description = "System Information and Health Endpoints")
 public class SystemController {
 
-    @Value("${system.region:ap-south-1 (Mumbai)}")
-    private String region;
+    @Value("${spring.application.name:Multi Region Task Manager}")
+    private String applicationName;
 
-    @Value("${system.version:v0.0.1-SNAPSHOT}")
+    @Value("${system.version:0.0.1-SNAPSHOT}")
     private String version;
 
-    @Operation(summary = "Get system health, active region, and version info")
-    @GetMapping("/status")
-    public ApiResponse<SystemStatusResponse> getSystemStatus() {
-        SystemStatusResponse response = SystemStatusResponse.builder()
-                .region(region)
+    @Value("${system.active-region:${DEPLOYMENT_REGION:ap-south-1}}")
+    private String activeRegion;
+
+    @Value("${spring.profiles.active:dev}")
+    private String environment;
+
+    @Operation(summary = "Get detailed dynamic system information")
+    @GetMapping("/info")
+    public ApiResponse<SystemInfoResponse> getSystemInfo() {
+        long jvmUptimeSeconds = ManagementFactory.getRuntimeMXBean().getUptime() / 1000;
+
+        SystemInfoResponse info = SystemInfoResponse.builder()
+                .applicationName(applicationName)
                 .version(version)
-                .status("UP")
-                .timestamp(System.currentTimeMillis())
+                .activeRegion(activeRegion)
+                .environment(environment)
+                .javaVersion(System.getProperty("java.version"))
+                .serverTime(LocalDateTime.now())
+                .uptime(jvmUptimeSeconds)
+                .health("UP")
                 .build();
 
         return new ApiResponse<>(
                 true,
-                "System status fetched successfully",
-                response
+                "System information fetched successfully",
+                info
         );
+    }
+
+    @Operation(summary = "Legacy system status endpoint")
+    @GetMapping("/status")
+    public ApiResponse<SystemInfoResponse> getSystemStatus() {
+        return getSystemInfo();
     }
 }

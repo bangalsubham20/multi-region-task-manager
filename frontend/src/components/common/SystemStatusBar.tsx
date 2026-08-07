@@ -1,91 +1,89 @@
-import React, { useState } from 'react';
-import { useSystemStatus } from '../../hooks';
-import { REGIONS } from '../../utils/constants';
-import type { Region } from '../../types';
+import React from 'react';
+import { useSystemInfo } from '../../hooks';
 
 export const SystemStatusBar: React.FC = () => {
-  const { systemStatus, refreshStatus } = useSystemStatus(10000);
-  const [selectedRegion, setSelectedRegion] = useState<Region>(REGIONS[0]); // Mumbai default
+  const { systemInfo } = useSystemInfo(10000);
 
-  const handleRegionSwitch = (region: Region) => {
-    setSelectedRegion(region);
-    refreshStatus();
+  const formatUptime = (seconds: number) => {
+    if (!seconds || seconds <= 0) return '0s';
+    const hrs = Math.floor(seconds / 3600);
+    const mins = Math.floor((seconds % 3600) / 60);
+    const secs = seconds % 60;
+    if (hrs > 0) return `${hrs}h ${mins}m ${secs}s`;
+    if (mins > 0) return `${mins}m ${secs}s`;
+    return `${secs}s`;
   };
 
-  const responseTime = systemStatus.responseTimeMs ?? parseInt(selectedRegion.ping, 10) ?? 24;
-
   return (
-    <div className="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 shadow-xl backdrop-blur-md mb-8">
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-4 items-center">
-        
-        {/* 1. Region Indicator (Mumbai / Frankfurt selector) */}
-        <div className="col-span-2 md:col-span-1 border-r-0 md:border-r border-slate-800 pr-0 md:pr-4">
-          <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
-            Target Region
-          </label>
-          <div className="relative">
-            <select
-              value={selectedRegion.id}
-              onChange={(e) => {
-                const target = REGIONS.find((r) => r.id === e.target.value);
-                if (target) handleRegionSwitch(target);
-              }}
-              className="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-1.5 text-xs font-semibold text-slate-200 focus:outline-none focus:border-indigo-500 cursor-pointer"
-            >
-              <option value="ap-south-1">🇮🇳 Mumbai (ap-south-1)</option>
-              <option value="eu-central-1">🇩🇪 Frankfurt (eu-central-1)</option>
-              <option value="us-east-1">🇺🇸 N. Virginia (us-east-1)</option>
-              <option value="ap-northeast-1">🇯🇵 Tokyo (ap-northeast-1)</option>
-            </select>
-          </div>
-        </div>
-
-        {/* 2. Active Deployment Region */}
-        <div className="border-r-0 md:border-r border-slate-800 pr-0 md:pr-4">
-          <span className="block text-[10px] font-bold uppercase tracking-wider text-slate-400">
-            Deployment Region
+    <div className="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 shadow-xl backdrop-blur-md mb-8 space-y-4">
+      <div className="flex items-center justify-between border-b border-slate-800/80 pb-3">
+        <div className="flex items-center space-x-3">
+          <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span className="text-sm font-bold text-slate-100">{systemInfo.applicationName}</span>
+          <span className="px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300 text-[11px] font-mono border border-indigo-500/30">
+            {systemInfo.environment}
           </span>
-          <div className="flex items-center space-x-2 mt-1">
-            <span className="text-sm font-semibold text-slate-100">{systemStatus.region}</span>
-          </div>
         </div>
-
-        {/* 3. API Response Time */}
-        <div className="border-r-0 md:border-r border-slate-800 pr-0 md:pr-4">
-          <span className="block text-[10px] font-bold uppercase tracking-wider text-slate-400">
-            API Response Time
-          </span>
-          <div className="flex items-center space-x-2 mt-1">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-            <span className="text-sm font-mono font-bold text-emerald-400">{responseTime} ms</span>
-          </div>
+        <div className="text-xs font-mono text-slate-400">
+          Uptime: <span className="text-slate-200 font-semibold">{formatUptime(systemInfo.uptime)}</span>
         </div>
+      </div>
 
-        {/* 4. Backend Version */}
-        <div className="border-r-0 md:border-r border-slate-800 pr-0 md:pr-4">
-          <span className="block text-[10px] font-bold uppercase tracking-wider text-slate-400">
-            Backend Version
-          </span>
-          <div className="mt-1">
-            <span className="px-2.5 py-0.5 rounded-md bg-indigo-500/20 text-indigo-300 text-xs font-mono font-medium border border-indigo-500/30">
-              {systemStatus.version}
-            </span>
-          </div>
-        </div>
-
-        {/* 5. Health Status */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 text-xs">
         <div>
-          <span className="block text-[10px] font-bold uppercase tracking-wider text-slate-400">
+          <span className="block text-[10px] font-bold uppercase tracking-wider text-slate-500">
+            Active Region
+          </span>
+          <span className="text-slate-200 font-mono font-bold mt-1 block">
+            📍 {systemInfo.activeRegion}
+          </span>
+        </div>
+
+        <div>
+          <span className="block text-[10px] font-bold uppercase tracking-wider text-slate-500">
+            Version
+          </span>
+          <span className="text-slate-200 font-mono font-semibold mt-1 block">
+            v{systemInfo.version}
+          </span>
+        </div>
+
+        <div>
+          <span className="block text-[10px] font-bold uppercase tracking-wider text-slate-500">
+            Java Runtime
+          </span>
+          <span className="text-slate-200 font-mono font-semibold mt-1 block">
+            JDK {systemInfo.javaVersion}
+          </span>
+        </div>
+
+        <div>
+          <span className="block text-[10px] font-bold uppercase tracking-wider text-slate-500">
+            API Latency
+          </span>
+          <span className="text-emerald-400 font-mono font-bold mt-1 block">
+            ⚡ {systemInfo.responseTimeMs ?? 18} ms
+          </span>
+        </div>
+
+        <div>
+          <span className="block text-[10px] font-bold uppercase tracking-wider text-slate-500">
             Health Status
           </span>
-          <div className="flex items-center space-x-2 mt-1">
-            <span className="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 flex items-center space-x-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-              <span>{systemStatus.status}</span>
-            </span>
-          </div>
+          <span className="inline-flex items-center space-x-1 px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 font-semibold border border-emerald-500/30 mt-1">
+            <span>●</span>
+            <span>{systemInfo.health}</span>
+          </span>
         </div>
 
+        <div>
+          <span className="block text-[10px] font-bold uppercase tracking-wider text-slate-500">
+            Server Time
+          </span>
+          <span className="text-slate-400 font-mono text-[11px] truncate mt-1 block" title={systemInfo.serverTime}>
+            {systemInfo.serverTime ? systemInfo.serverTime.split('.')[0].replace('T', ' ') : 'N/A'}
+          </span>
+        </div>
       </div>
     </div>
   );
