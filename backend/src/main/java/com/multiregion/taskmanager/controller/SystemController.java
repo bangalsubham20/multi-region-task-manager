@@ -48,7 +48,7 @@ public class SystemController {
     public ApiResponse<TaskMetricsResponse> getTaskMetrics() {
         long total = taskRepository.count();
         long completed = taskRepository.countByStatus(TaskStatus.COMPLETED);
-        long pending = taskRepository.countByStatus(TaskStatus.PENDING);
+        long pending = taskRepository.countByStatus(TaskStatus.TODO);
         long inProgress = taskRepository.countByStatus(TaskStatus.IN_PROGRESS);
         long high = taskRepository.countByPriorityIn(List.of(Priority.HIGH, Priority.URGENT));
         long low = taskRepository.countByPriorityIn(List.of(Priority.LOW, Priority.MEDIUM));
