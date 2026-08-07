@@ -4,18 +4,24 @@ import com.multiregion.taskmanager.dto.ApiResponse;
 import com.multiregion.taskmanager.dto.SystemInfoResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.info.BuildProperties;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.lang.management.ManagementFactory;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/system")
 @Tag(name = "System API", description = "System Information and Health Endpoints")
 public class SystemController {
+
+    @Autowired(required = false)
+    private BuildProperties buildProperties;
 
     @Value("${spring.application.name:Multi Region Task Manager}")
     private String applicationName;
@@ -34,9 +40,17 @@ public class SystemController {
     public ApiResponse<SystemInfoResponse> getSystemInfo() {
         long jvmUptimeSeconds = ManagementFactory.getRuntimeMXBean().getUptime() / 1000;
 
+        String buildVer = Optional.ofNullable(buildProperties).map(BuildProperties::getVersion).orElse(version);
+        String artifact = Optional.ofNullable(buildProperties).map(BuildProperties::getArtifact).orElse("multi-region-task-manager");
+        String group = Optional.ofNullable(buildProperties).map(BuildProperties::getGroup).orElse("com.multiregion");
+        String buildTime = Optional.ofNullable(buildProperties).map(p -> p.getTime().toString()).orElse(null);
+
         SystemInfoResponse info = SystemInfoResponse.builder()
                 .applicationName(applicationName)
-                .version(version)
+                .version(buildVer)
+                .artifact(artifact)
+                .group(group)
+                .buildTime(buildTime)
                 .activeRegion(activeRegion)
                 .environment(environment)
                 .javaVersion(System.getProperty("java.version"))

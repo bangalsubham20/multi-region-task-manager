@@ -1,6 +1,9 @@
 export interface SystemInfo {
   applicationName: string;
   version: string;
+  artifact?: string;
+  group?: string;
+  buildTime?: string;
   activeRegion: string;
   environment: string;
   javaVersion: string;
