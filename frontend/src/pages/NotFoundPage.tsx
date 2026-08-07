@@ -1,0 +1,22 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+export const NotFoundPage: React.FC = () => {
+  return (
+    <div className="text-center py-20 space-y-4">
+      <h1 className="text-6xl font-extrabold text-indigo-500 font-mono">404</h1>
+      <h2 className="text-2xl font-bold text-white">Page Not Found</h2>
+      <p className="text-slate-400 text-sm max-w-md mx-auto">
+        The requested routing zone or task resource does not exist in this regional node.
+      </p>
+      <div className="pt-4">
+        <Link
+          to="/"
+          className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold rounded-xl transition-all"
+        >
+          Return to Dashboard
+        </Link>
+      </div>
+    </div>
+  );
+};
