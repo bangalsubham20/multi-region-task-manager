@@ -1,0 +1,89 @@
+version: "3.9"
+
+services:
+
+  mysql:
+
+    image: mysql:8.4
+
+    container_name: taskmanager-mysql
+
+    restart: always
+
+    environment:
+
+      MYSQL_DATABASE: task_manager
+
+      MYSQL_ROOT_PASSWORD: root
+
+    ports:
+
+      - "3306:3306"
+
+    volumes:
+
+      - mysql_data:/var/lib/mysql
+
+    networks:
+
+      - task-network
+
+  backend:
+
+    build:
+
+      context: ./backend
+
+    container_name: taskmanager-backend
+
+    depends_on:
+
+      - mysql
+
+    environment:
+
+      DB_URL: jdbc:mysql://mysql:3306/task_manager
+
+      DB_USERNAME: root
+
+      DB_PASSWORD: root
+
+      APP_ENV: docker
+
+      AWS_REGION: local
+
+    ports:
+
+      - "8080:8080"
+
+    networks:
+
+      - task-network
+
+  frontend:
+
+    build:
+
+      context: ./frontend
+
+    container_name: taskmanager-frontend
+
+    depends_on:
+
+      - backend
+
+    ports:
+
+      - "5173:80"
+
+    networks:
+
+      - task-network
+
+networks:
+
+  task-network:
+
+volumes:
+
+  mysql_data:
