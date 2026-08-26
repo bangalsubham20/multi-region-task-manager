@@ -45,7 +45,7 @@ pipeline {
         stage('Health Check') {
             steps {
                 bat '''
-                    curl --fail http://localhost:8080/actuator/health
+                    curl --fail http://localhost:8080/api/v1/actuator/health
                 '''
             }
         }
