@@ -44,11 +44,13 @@ pipeline {
 
         stage('Health Check') {
             steps {
-                echo 'Waiting for application to start...'
-                sleep time: 15, unit: 'SECONDS'
-                bat '''
-                    curl.exe --fail http://localhost:8080/api/v1/actuator/health
-                '''
+                echo 'Checking application health...'
+                retry(5) {
+                    sleep time: 5, unit: 'SECONDS'
+                    bat '''
+                        curl.exe --fail http://localhost:8080/api/v1/actuator/health
+                    '''
+                }
             }
         }
     }
