@@ -4,61 +4,60 @@ pipeline {
 
     stages {
 
-        stage('Checkout') {
+        stage('Check Environment') {
             steps {
-                echo 'Checking out source code...'
-                checkout scm
+                bat 'java -version'
+                bat 'git --version'
+                bat 'node --version'
+                bat 'npm --version'
+                bat 'docker --version'
+                bat 'docker compose version'
             }
         }
 
-        stage('Backend Tests') {
+        stage('Run Backend Tests') {
             steps {
-                echo 'Running backend tests...'
-
-                dir('backend') {
-                    bat 'mvnw.cmd test'
-                }
+                bat '''
+                    cd backend
+                    mvnw.cmd test
+                '''
             }
         }
 
-        stage('Backend Build') {
+        stage('Build Docker Images') {
             steps {
-                echo 'Building Spring Boot application...'
-
-                dir('backend') {
-                    bat 'mvnw.cmd clean package -DskipTests'
-                }
-            }
-        }
-
-        stage('Frontend Build') {
-            steps {
-                echo 'Installing frontend dependencies...'
-
-                dir('frontend') {
-                    bat 'npm ci'
-                    bat 'npm run build'
-                }
-            }
-        }
-
-        stage('Docker Build') {
-            steps {
-                echo 'Building Docker images...'
-
                 bat 'docker compose build'
+            }
+        }
+
+        stage('Deploy Application') {
+            steps {
+                bat 'docker compose up -d'
+            }
+        }
+
+        stage('Check Containers') {
+            steps {
+                bat 'docker compose ps'
+            }
+        }
+
+        stage('Health Check') {
+            steps {
+                bat '''
+                    curl --fail http://localhost:8080/actuator/health
+                '''
             }
         }
     }
 
     post {
-
         success {
-            echo 'CI PIPELINE SUCCESSFUL'
+            echo 'CI/CD PIPELINE SUCCESSFUL'
         }
 
         failure {
-            echo 'CI PIPELINE FAILED'
+            echo 'CI/CD PIPELINE FAILED'
         }
 
         always {
