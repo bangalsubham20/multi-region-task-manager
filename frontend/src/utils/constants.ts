@@ -8,15 +8,15 @@ export const REGIONS: Region[] = [
 ];
 
 export const STATUS_COLORS: Record<TaskStatus, { bg: string; text: string; border: string }> = {
-  PENDING: { bg: 'bg-amber-500/10', text: 'text-amber-400', border: 'border-amber-500/30' },
-  IN_PROGRESS: { bg: 'bg-blue-500/10', text: 'text-blue-400', border: 'border-blue-500/30' },
-  COMPLETED: { bg: 'bg-emerald-500/10', text: 'text-emerald-400', border: 'border-emerald-500/30' },
-  CANCELLED: { bg: 'bg-rose-500/10', text: 'text-rose-400', border: 'border-rose-500/30' },
+  PENDING: { bg: 'bg-amber-500/10', text: 'text-amber-300', border: 'border-amber-500/30' },
+  IN_PROGRESS: { bg: 'bg-[#4A7FA7]/20', text: 'text-[#B3CFE5]', border: 'border-[#4A7FA7]/40' },
+  COMPLETED: { bg: 'bg-emerald-500/10', text: 'text-emerald-300', border: 'border-emerald-500/30' },
+  CANCELLED: { bg: 'bg-rose-500/10', text: 'text-rose-300', border: 'border-rose-500/30' },
 };
 
 export const PRIORITY_COLORS: Record<Priority, { bg: string; text: string; badge: string }> = {
-  LOW: { bg: 'bg-slate-500/10', text: 'text-slate-400', badge: 'bg-slate-700' },
-  MEDIUM: { bg: 'bg-indigo-500/10', text: 'text-indigo-400', badge: 'bg-indigo-700' },
-  HIGH: { bg: 'bg-orange-500/10', text: 'text-orange-400', badge: 'bg-orange-700' },
-  URGENT: { bg: 'bg-red-500/10', text: 'text-red-400', badge: 'bg-red-700' },
+  LOW: { bg: 'bg-[#1A3D63]', text: 'text-[#B3CFE5]', badge: 'bg-[#1A3D63]' },
+  MEDIUM: { bg: 'bg-[#4A7FA7]/20', text: 'text-[#B3CFE5]', badge: 'bg-[#4A7FA7]/40' },
+  HIGH: { bg: 'bg-amber-500/20', text: 'text-amber-300', badge: 'bg-amber-700/50' },
+  URGENT: { bg: 'bg-rose-500/20', text: 'text-rose-300', badge: 'bg-rose-700/50' },
 };

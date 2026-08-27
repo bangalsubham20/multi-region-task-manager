@@ -55,12 +55,12 @@ export const TaskListPage: React.FC = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-extrabold text-white">Task Console</h1>
-          <p className="text-xs text-slate-400">Search, filter, and orchestrate regional tasks</p>
+          <h1 className="text-2xl font-extrabold text-[#F6FAFD]">Task Console</h1>
+          <p className="text-xs text-[#B3CFE5]">Search, filter, and orchestrate regional tasks</p>
         </div>
         <button
           onClick={handleOpenCreate}
-          className="px-4 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold rounded-xl shadow-lg shadow-indigo-600/30 transition-all"
+          className="px-4 py-2.5 bg-[#4A7FA7] hover:bg-[#3b6a8e] text-[#F6FAFD] text-xs font-semibold rounded-xl shadow-lg shadow-[#4A7FA7]/30 transition-all"
         >
           + Add New Task
         </button>
@@ -79,15 +79,15 @@ export const TaskListPage: React.FC = () => {
       {/* Grid */}
       {loading ? (
         <div className="flex justify-center py-16">
-          <div className="w-8 h-8 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
+          <div className="w-8 h-8 border-4 border-[#4A7FA7] border-t-transparent rounded-full animate-spin"></div>
         </div>
       ) : error ? (
-        <div className="p-4 bg-rose-500/10 border border-rose-500/20 rounded-2xl text-rose-400 text-sm text-center">
+        <div className="p-4 bg-rose-500/10 border border-rose-500/20 rounded-2xl text-rose-300 text-sm text-center">
           {error}
         </div>
       ) : tasks.length === 0 ? (
-        <div className="text-center py-16 bg-slate-900/40 rounded-2xl border border-slate-800">
-          <p className="text-slate-400 text-sm">No tasks match the filter criteria.</p>
+        <div className="text-center py-16 bg-[#1A3D63]/40 rounded-2xl border border-[#4A7FA7]/20">
+          <p className="text-[#B3CFE5] text-sm">No tasks match the filter criteria.</p>
         </div>
       ) : (
         <>
@@ -104,23 +104,23 @@ export const TaskListPage: React.FC = () => {
 
           {/* Pagination */}
           {pageInfo.totalPages > 1 && (
-            <div className="flex items-center justify-between pt-4 border-t border-slate-800 text-xs text-slate-400">
+            <div className="flex items-center justify-between pt-4 border-t border-[#1A3D63] text-xs text-[#B3CFE5]">
               <div>
-                Page <span className="font-semibold text-white">{pageInfo.number + 1}</span> of{' '}
-                <span className="font-semibold text-white">{pageInfo.totalPages}</span>
+                Page <span className="font-semibold text-[#F6FAFD]">{pageInfo.number + 1}</span> of{' '}
+                <span className="font-semibold text-[#F6FAFD]">{pageInfo.totalPages}</span>
               </div>
               <div className="flex space-x-2">
                 <button
                   disabled={pageInfo.first}
                   onClick={() => handlePageChange(pageInfo.number - 1)}
-                  className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 disabled:opacity-40"
+                  className="px-3 py-1.5 rounded-lg bg-[#1A3D63] hover:bg-[#4A7FA7] text-[#F6FAFD] disabled:opacity-40 transition-colors"
                 >
                   Previous
                 </button>
                 <button
                   disabled={pageInfo.last}
                   onClick={() => handlePageChange(pageInfo.number + 1)}
-                  className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 disabled:opacity-40"
+                  className="px-3 py-1.5 rounded-lg bg-[#1A3D63] hover:bg-[#4A7FA7] text-[#F6FAFD] disabled:opacity-40 transition-colors"
                 >
                   Next
                 </button>

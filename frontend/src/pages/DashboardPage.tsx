@@ -32,27 +32,27 @@ export const DashboardPage: React.FC = () => {
   return (
     <div className="space-y-8">
       {/* Header Banner */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-indigo-900/60 via-slate-900 to-purple-900/60 p-8 border border-indigo-500/20 shadow-2xl">
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#0A1931] via-[#1A3D63] to-[#0A1931] p-8 border border-[#4A7FA7]/30 shadow-2xl">
         <div className="relative z-10 max-w-2xl">
-          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-400 text-xs font-semibold mb-4">
+          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#4A7FA7]/20 border border-[#4A7FA7]/40 text-[#B3CFE5] text-xs font-semibold mb-4">
             <span>✨ Global Distribution Engine</span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-[#F6FAFD] tracking-tight">
             Multi-Region Workload Dashboard
           </h1>
-          <p className="mt-3 text-slate-300 text-sm sm:text-base leading-relaxed">
+          <p className="mt-3 text-[#B3CFE5] text-sm sm:text-base leading-relaxed">
             Monitor active tasks across all deployment zones. Task states are replicated asynchronously to ensure low latency and automated failover resiliency.
           </p>
           <div className="mt-6 flex items-center space-x-4">
             <button
               onClick={handleOpenCreate}
-              className="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold shadow-lg shadow-indigo-600/30 transition-all hover:scale-[1.02]"
+              className="px-5 py-2.5 rounded-xl bg-[#4A7FA7] hover:bg-[#3b6a8e] text-[#F6FAFD] text-sm font-semibold shadow-lg shadow-[#4A7FA7]/30 transition-all hover:scale-[1.02]"
             >
               + Create Task
             </button>
             <Link
               to="/tasks"
-              className="px-5 py-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-200 text-sm font-semibold border border-slate-700 transition-all"
+              className="px-5 py-2.5 rounded-xl bg-[#1A3D63] hover:bg-[#0A1931] text-[#F6FAFD] text-sm font-semibold border border-[#4A7FA7]/40 transition-all"
             >
               View Console
             </Link>
@@ -71,28 +71,28 @@ export const DashboardPage: React.FC = () => {
       <div>
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h2 className="text-xl font-bold text-slate-100">Recent Workloads</h2>
-            <p className="text-xs text-slate-400">Tasks active in the current synchronization queue</p>
+            <h2 className="text-xl font-bold text-[#F6FAFD]">Recent Workloads</h2>
+            <p className="text-xs text-[#B3CFE5]">Tasks active in the current synchronization queue</p>
           </div>
-          <Link to="/tasks" className="text-xs font-semibold text-indigo-400 hover:text-indigo-300">
+          <Link to="/tasks" className="text-xs font-semibold text-[#4A7FA7] hover:text-[#B3CFE5]">
             View All →
           </Link>
         </div>
 
         {loading ? (
           <div className="flex justify-center py-12">
-            <div className="w-8 h-8 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
+            <div className="w-8 h-8 border-4 border-[#4A7FA7] border-t-transparent rounded-full animate-spin"></div>
           </div>
         ) : error ? (
-          <div className="p-4 bg-rose-500/10 border border-rose-500/20 rounded-2xl text-rose-400 text-sm text-center">
+          <div className="p-4 bg-rose-500/10 border border-rose-500/20 rounded-2xl text-rose-300 text-sm text-center">
             {error}
           </div>
         ) : tasks.length === 0 ? (
-          <div className="text-center py-12 bg-slate-900/40 rounded-2xl border border-slate-800">
-            <p className="text-slate-400 text-sm">No tasks found in current region.</p>
+          <div className="text-center py-12 bg-[#1A3D63]/40 rounded-2xl border border-[#4A7FA7]/20">
+            <p className="text-[#B3CFE5] text-sm">No tasks found in current region.</p>
             <button
               onClick={handleOpenCreate}
-              className="mt-4 px-4 py-2 bg-indigo-600 text-white text-xs font-semibold rounded-xl"
+              className="mt-4 px-4 py-2 bg-[#4A7FA7] text-[#F6FAFD] text-xs font-semibold rounded-xl hover:bg-[#3b6a8e] transition-colors"
             >
               Add First Task
             </button>

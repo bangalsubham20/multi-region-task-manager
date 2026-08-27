@@ -62,15 +62,15 @@ export const TaskModal: React.FC<TaskModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm">
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-lg shadow-2xl p-6 relative">
-        <h2 className="text-xl font-bold text-slate-100 mb-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0A1931]/80 backdrop-blur-sm">
+      <div className="bg-[#1A3D63] border border-[#4A7FA7]/40 rounded-2xl w-full max-w-lg shadow-2xl p-6 relative">
+        <h2 className="text-xl font-bold text-[#F6FAFD] mb-4">
           {initialTask ? 'Edit Task' : 'Create Multi-Region Task'}
         </h2>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">
+            <label className="block text-xs font-semibold uppercase tracking-wider text-[#B3CFE5] mb-1">
               Title *
             </label>
             <input
@@ -79,12 +79,12 @@ export const TaskModal: React.FC<TaskModalProps> = ({
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="e.g. Deploy Redis Multi-Region Sentinel"
-              className="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2 text-slate-200 focus:outline-none focus:border-indigo-500 text-sm"
+              className="w-full bg-[#0A1931] border border-[#4A7FA7]/40 rounded-xl px-4 py-2 text-[#F6FAFD] placeholder-[#B3CFE5]/40 focus:outline-none focus:border-[#4A7FA7] text-sm"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">
+            <label className="block text-xs font-semibold uppercase tracking-wider text-[#B3CFE5] mb-1">
               Description
             </label>
             <textarea
@@ -92,19 +92,19 @@ export const TaskModal: React.FC<TaskModalProps> = ({
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Task context, instructions, or region specifications..."
-              className="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2 text-slate-200 focus:outline-none focus:border-indigo-500 text-sm resize-none"
+              className="w-full bg-[#0A1931] border border-[#4A7FA7]/40 rounded-xl px-4 py-2 text-[#F6FAFD] placeholder-[#B3CFE5]/40 focus:outline-none focus:border-[#4A7FA7] text-sm resize-none"
             />
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-[#B3CFE5] mb-1">
                 Status
               </label>
               <select
                 value={status}
                 onChange={(e) => setStatus(e.target.value as TaskStatus)}
-                className="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-slate-200 focus:outline-none focus:border-indigo-500 text-sm"
+                className="w-full bg-[#0A1931] border border-[#4A7FA7]/40 rounded-xl px-3 py-2 text-[#F6FAFD] focus:outline-none focus:border-[#4A7FA7] text-sm"
               >
                 <option value="PENDING">PENDING</option>
                 <option value="IN_PROGRESS">IN_PROGRESS</option>
@@ -114,13 +114,13 @@ export const TaskModal: React.FC<TaskModalProps> = ({
             </div>
 
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-[#B3CFE5] mb-1">
                 Priority
               </label>
               <select
                 value={priority}
                 onChange={(e) => setPriority(e.target.value as Priority)}
-                className="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-slate-200 focus:outline-none focus:border-indigo-500 text-sm"
+                className="w-full bg-[#0A1931] border border-[#4A7FA7]/40 rounded-xl px-3 py-2 text-[#F6FAFD] focus:outline-none focus:border-[#4A7FA7] text-sm"
               >
                 <option value="LOW">LOW</option>
                 <option value="MEDIUM">MEDIUM</option>
@@ -131,29 +131,29 @@ export const TaskModal: React.FC<TaskModalProps> = ({
           </div>
 
           <div>
-            <label className="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">
+            <label className="block text-xs font-semibold uppercase tracking-wider text-[#B3CFE5] mb-1">
               Due Date
             </label>
             <input
               type="date"
               value={dueDate}
               onChange={(e) => setDueDate(e.target.value)}
-              className="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2 text-slate-200 focus:outline-none focus:border-indigo-500 text-sm"
+              className="w-full bg-[#0A1931] border border-[#4A7FA7]/40 rounded-xl px-4 py-2 text-[#F6FAFD] focus:outline-none focus:border-[#4A7FA7] text-sm"
             />
           </div>
 
-          <div className="flex items-center justify-end space-x-3 pt-4 border-t border-slate-800">
+          <div className="flex items-center justify-end space-x-3 pt-4 border-t border-[#0A1931]">
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 text-sm font-medium transition-colors"
+              className="px-4 py-2 rounded-xl text-[#B3CFE5] hover:text-[#F6FAFD] hover:bg-[#0A1931] text-sm font-medium transition-colors"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={submitting}
-              className="px-5 py-2 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-medium text-sm shadow-lg shadow-indigo-500/25 transition-all disabled:opacity-50"
+              className="px-5 py-2 rounded-xl bg-[#4A7FA7] hover:bg-[#3b6a8e] text-[#F6FAFD] font-medium text-sm shadow-lg shadow-[#4A7FA7]/30 transition-all disabled:opacity-50"
             >
               {submitting ? 'Saving...' : initialTask ? 'Update Task' : 'Create Task'}
             </button>

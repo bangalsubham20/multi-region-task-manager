@@ -21,11 +21,11 @@ export const StatsCards: React.FC<StatsCardsProps> = ({ tasks, totalElements = 0
   const highPriority = metrics ? metrics.highPriority : tasks.filter((t) => t.priority === 'HIGH' || t.priority === 'URGENT').length;
 
   const stats = [
-    { label: 'Total Tasks', value: total, color: 'from-blue-500/20 to-indigo-500/10 border-indigo-500/30 text-indigo-400' },
-    { label: 'Pending (Todo)', value: pending, color: 'from-amber-500/20 to-yellow-500/10 border-amber-500/30 text-amber-400' },
-    { label: 'In Progress', value: inProgress, color: 'from-sky-500/20 to-cyan-500/10 border-sky-500/30 text-sky-400' },
-    { label: 'Completed', value: completed, color: 'from-emerald-500/20 to-teal-500/10 border-emerald-500/30 text-emerald-400' },
-    { label: 'High Priority', value: highPriority, color: 'from-rose-500/20 to-red-500/10 border-rose-500/30 text-rose-400' },
+    { label: 'Total Tasks', value: total, color: 'from-[#1A3D63] to-[#0A1931] border-[#4A7FA7]/40 text-[#B3CFE5]' },
+    { label: 'Pending (Todo)', value: pending, color: 'from-[#1A3D63] to-[#0A1931] border-amber-500/30 text-amber-300' },
+    { label: 'In Progress', value: inProgress, color: 'from-[#1A3D63] to-[#0A1931] border-[#4A7FA7]/60 text-[#B3CFE5]' },
+    { label: 'Completed', value: completed, color: 'from-[#1A3D63] to-[#0A1931] border-emerald-500/30 text-emerald-300' },
+    { label: 'High Priority', value: highPriority, color: 'from-[#1A3D63] to-[#0A1931] border-rose-500/30 text-rose-300' },
   ];
 
   return (
@@ -35,8 +35,8 @@ export const StatsCards: React.FC<StatsCardsProps> = ({ tasks, totalElements = 0
           key={idx}
           className={`p-5 rounded-2xl bg-gradient-to-br border ${stat.color} backdrop-blur-md shadow-lg transition-all duration-200 hover:-translate-y-0.5`}
         >
-          <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">{stat.label}</p>
-          <p className="text-3xl font-extrabold mt-2 text-white font-mono">{stat.value}</p>
+          <p className="text-xs font-semibold uppercase tracking-wider text-[#B3CFE5]/80">{stat.label}</p>
+          <p className="text-3xl font-extrabold mt-2 text-[#F6FAFD] font-mono">{stat.value}</p>
         </div>
       ))}
     </div>
