@@ -51,16 +51,16 @@ export const TaskListPage: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
         <div>
-          <h1 className="text-2xl font-extrabold text-[#F6FAFD]">Task Console</h1>
+          <h1 className="text-xl sm:text-2xl font-extrabold text-[#F6FAFD]">Task Console</h1>
           <p className="text-xs text-[#B3CFE5]">Search, filter, and orchestrate regional tasks</p>
         </div>
         <button
           onClick={handleOpenCreate}
-          className="px-4 py-2.5 bg-[#4A7FA7] hover:bg-[#3b6a8e] text-[#F6FAFD] text-xs font-semibold rounded-xl shadow-lg shadow-[#4A7FA7]/30 transition-all"
+          className="w-full sm:w-auto px-4 py-2.5 bg-[#4A7FA7] hover:bg-[#3b6a8e] text-[#F6FAFD] text-xs font-semibold rounded-xl shadow-lg shadow-[#4A7FA7]/30 transition-all text-center"
         >
           + Add New Task
         </button>
@@ -86,12 +86,12 @@ export const TaskListPage: React.FC = () => {
           {error}
         </div>
       ) : tasks.length === 0 ? (
-        <div className="text-center py-16 bg-[#1A3D63]/40 rounded-2xl border border-[#4A7FA7]/20">
+        <div className="text-center py-16 bg-[#1A3D63]/40 rounded-2xl border border-[#4A7FA7]/20 px-4">
           <p className="text-[#B3CFE5] text-sm">No tasks match the filter criteria.</p>
         </div>
       ) : (
         <>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {tasks.map((task) => (
               <TaskCard
                 key={task.id}
@@ -104,7 +104,7 @@ export const TaskListPage: React.FC = () => {
 
           {/* Pagination */}
           {pageInfo.totalPages > 1 && (
-            <div className="flex items-center justify-between pt-4 border-t border-[#1A3D63] text-xs text-[#B3CFE5]">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-0 pt-4 border-t border-[#1A3D63] text-xs text-[#B3CFE5]">
               <div>
                 Page <span className="font-semibold text-[#F6FAFD]">{pageInfo.number + 1}</span> of{' '}
                 <span className="font-semibold text-[#F6FAFD]">{pageInfo.totalPages}</span>

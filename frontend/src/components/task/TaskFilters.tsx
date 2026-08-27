@@ -18,17 +18,17 @@ export const TaskFilters: React.FC<TaskFiltersProps> = ({
   onStatusSelect,
 }) => {
   return (
-    <div className="bg-[#1A3D63]/80 border border-[#4A7FA7]/30 rounded-2xl p-4 space-y-4">
-      <div className="flex flex-col md:flex-row gap-4">
+    <div className="bg-[#1A3D63]/80 border border-[#4A7FA7]/30 rounded-2xl p-3.5 sm:p-4 space-y-4">
+      <div className="flex flex-col md:flex-row gap-3 sm:gap-4">
         <input
           type="text"
           placeholder="Search tasks by title..."
           value={title || ''}
           onChange={onSearchChange}
-          className="flex-1 bg-[#0A1931] border border-[#4A7FA7]/40 rounded-xl px-4 py-2 text-[#F6FAFD] placeholder-[#B3CFE5]/40 focus:outline-none focus:border-[#4A7FA7] text-sm"
+          className="w-full md:flex-1 bg-[#0A1931] border border-[#4A7FA7]/40 rounded-xl px-4 py-2 text-[#F6FAFD] placeholder-[#B3CFE5]/40 focus:outline-none focus:border-[#4A7FA7] text-xs sm:text-sm"
         />
 
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-1.5 sm:gap-2 items-center">
           <button
             onClick={() => onStatusSelect(undefined)}
             className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${

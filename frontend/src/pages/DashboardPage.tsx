@@ -30,29 +30,29 @@ export const DashboardPage: React.FC = () => {
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 sm:space-y-8">
       {/* Header Banner */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#0A1931] via-[#1A3D63] to-[#0A1931] p-8 border border-[#4A7FA7]/30 shadow-2xl">
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#0A1931] via-[#1A3D63] to-[#0A1931] p-5 sm:p-8 border border-[#4A7FA7]/30 shadow-2xl">
         <div className="relative z-10 max-w-2xl">
-          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#4A7FA7]/20 border border-[#4A7FA7]/40 text-[#B3CFE5] text-xs font-semibold mb-4">
+          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#4A7FA7]/20 border border-[#4A7FA7]/40 text-[#B3CFE5] text-[11px] sm:text-xs font-semibold mb-3 sm:mb-4">
             <span>✨ Global Distribution Engine</span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-[#F6FAFD] tracking-tight">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#F6FAFD] tracking-tight">
             Multi-Region Workload Dashboard
           </h1>
-          <p className="mt-3 text-[#B3CFE5] text-sm sm:text-base leading-relaxed">
+          <p className="mt-2 sm:mt-3 text-[#B3CFE5] text-xs sm:text-sm md:text-base leading-relaxed">
             Monitor active tasks across all deployment zones. Task states are replicated asynchronously to ensure low latency and automated failover resiliency.
           </p>
-          <div className="mt-6 flex items-center space-x-4">
+          <div className="mt-5 sm:mt-6 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
             <button
               onClick={handleOpenCreate}
-              className="px-5 py-2.5 rounded-xl bg-[#4A7FA7] hover:bg-[#3b6a8e] text-[#F6FAFD] text-sm font-semibold shadow-lg shadow-[#4A7FA7]/30 transition-all hover:scale-[1.02]"
+              className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-[#4A7FA7] hover:bg-[#3b6a8e] text-[#F6FAFD] text-sm font-semibold shadow-lg shadow-[#4A7FA7]/30 transition-all hover:scale-[1.02] text-center"
             >
               + Create Task
             </button>
             <Link
               to="/tasks"
-              className="px-5 py-2.5 rounded-xl bg-[#1A3D63] hover:bg-[#0A1931] text-[#F6FAFD] text-sm font-semibold border border-[#4A7FA7]/40 transition-all"
+              className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-[#1A3D63] hover:bg-[#0A1931] text-[#F6FAFD] text-sm font-semibold border border-[#4A7FA7]/40 transition-all text-center"
             >
               View Console
             </Link>
@@ -66,12 +66,11 @@ export const DashboardPage: React.FC = () => {
       {/* Metrics Cards */}
       <StatsCards tasks={tasks} totalElements={pageInfo.totalElements} />
 
-
       {/* Recent Tasks Grid */}
       <div>
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 sm:mb-6 gap-2 sm:gap-0">
           <div>
-            <h2 className="text-xl font-bold text-[#F6FAFD]">Recent Workloads</h2>
+            <h2 className="text-lg sm:text-xl font-bold text-[#F6FAFD]">Recent Workloads</h2>
             <p className="text-xs text-[#B3CFE5]">Tasks active in the current synchronization queue</p>
           </div>
           <Link to="/tasks" className="text-xs font-semibold text-[#4A7FA7] hover:text-[#B3CFE5]">
@@ -88,7 +87,7 @@ export const DashboardPage: React.FC = () => {
             {error}
           </div>
         ) : tasks.length === 0 ? (
-          <div className="text-center py-12 bg-[#1A3D63]/40 rounded-2xl border border-[#4A7FA7]/20">
+          <div className="text-center py-12 bg-[#1A3D63]/40 rounded-2xl border border-[#4A7FA7]/20 px-4">
             <p className="text-[#B3CFE5] text-sm">No tasks found in current region.</p>
             <button
               onClick={handleOpenCreate}
@@ -98,7 +97,7 @@ export const DashboardPage: React.FC = () => {
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {tasks.map((task) => (
               <TaskCard
                 key={task.id}

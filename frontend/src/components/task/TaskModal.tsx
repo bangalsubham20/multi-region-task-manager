@@ -62,13 +62,13 @@ export const TaskModal: React.FC<TaskModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0A1931]/80 backdrop-blur-sm">
-      <div className="bg-[#1A3D63] border border-[#4A7FA7]/40 rounded-2xl w-full max-w-lg shadow-2xl p-6 relative">
-        <h2 className="text-xl font-bold text-[#F6FAFD] mb-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-[#0A1931]/80 backdrop-blur-sm overflow-y-auto">
+      <div className="bg-[#1A3D63] border border-[#4A7FA7]/40 rounded-2xl w-full max-w-lg shadow-2xl p-4 sm:p-6 relative max-h-[90vh] flex flex-col my-auto">
+        <h2 className="text-lg sm:text-xl font-bold text-[#F6FAFD] mb-4 shrink-0">
           {initialTask ? 'Edit Task' : 'Create Multi-Region Task'}
         </h2>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4 overflow-y-auto pr-1 flex-1">
           <div>
             <label className="block text-xs font-semibold uppercase tracking-wider text-[#B3CFE5] mb-1">
               Title *
@@ -79,7 +79,7 @@ export const TaskModal: React.FC<TaskModalProps> = ({
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="e.g. Deploy Redis Multi-Region Sentinel"
-              className="w-full bg-[#0A1931] border border-[#4A7FA7]/40 rounded-xl px-4 py-2 text-[#F6FAFD] placeholder-[#B3CFE5]/40 focus:outline-none focus:border-[#4A7FA7] text-sm"
+              className="w-full bg-[#0A1931] border border-[#4A7FA7]/40 rounded-xl px-3.5 py-2 text-[#F6FAFD] placeholder-[#B3CFE5]/40 focus:outline-none focus:border-[#4A7FA7] text-sm"
             />
           </div>
 
@@ -92,11 +92,11 @@ export const TaskModal: React.FC<TaskModalProps> = ({
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Task context, instructions, or region specifications..."
-              className="w-full bg-[#0A1931] border border-[#4A7FA7]/40 rounded-xl px-4 py-2 text-[#F6FAFD] placeholder-[#B3CFE5]/40 focus:outline-none focus:border-[#4A7FA7] text-sm resize-none"
+              className="w-full bg-[#0A1931] border border-[#4A7FA7]/40 rounded-xl px-3.5 py-2 text-[#F6FAFD] placeholder-[#B3CFE5]/40 focus:outline-none focus:border-[#4A7FA7] text-sm resize-none"
             />
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className="block text-xs font-semibold uppercase tracking-wider text-[#B3CFE5] mb-1">
                 Status
@@ -138,11 +138,11 @@ export const TaskModal: React.FC<TaskModalProps> = ({
               type="date"
               value={dueDate}
               onChange={(e) => setDueDate(e.target.value)}
-              className="w-full bg-[#0A1931] border border-[#4A7FA7]/40 rounded-xl px-4 py-2 text-[#F6FAFD] focus:outline-none focus:border-[#4A7FA7] text-sm"
+              className="w-full bg-[#0A1931] border border-[#4A7FA7]/40 rounded-xl px-3.5 py-2 text-[#F6FAFD] focus:outline-none focus:border-[#4A7FA7] text-sm"
             />
           </div>
 
-          <div className="flex items-center justify-end space-x-3 pt-4 border-t border-[#0A1931]">
+          <div className="flex items-center justify-end space-x-3 pt-4 border-t border-[#0A1931] shrink-0">
             <button
               type="button"
               onClick={onClose}

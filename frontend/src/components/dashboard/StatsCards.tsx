@@ -29,14 +29,14 @@ export const StatsCards: React.FC<StatsCardsProps> = ({ tasks, totalElements = 0
   ];
 
   return (
-    <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 mb-6 sm:mb-8">
       {stats.map((stat, idx) => (
         <div
           key={idx}
-          className={`p-5 rounded-2xl bg-gradient-to-br border ${stat.color} backdrop-blur-md shadow-lg transition-all duration-200 hover:-translate-y-0.5`}
+          className={`p-4 sm:p-5 rounded-2xl bg-gradient-to-br border ${stat.color} backdrop-blur-md shadow-lg transition-all duration-200 hover:-translate-y-0.5`}
         >
-          <p className="text-xs font-semibold uppercase tracking-wider text-[#B3CFE5]/80">{stat.label}</p>
-          <p className="text-3xl font-extrabold mt-2 text-[#F6FAFD] font-mono">{stat.value}</p>
+          <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-[#B3CFE5]/80 truncate">{stat.label}</p>
+          <p className="text-2xl sm:text-3xl font-extrabold mt-1.5 sm:mt-2 text-[#F6FAFD] font-mono">{stat.value}</p>
         </div>
       ))}
     </div>

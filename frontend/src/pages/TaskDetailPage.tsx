@@ -46,18 +46,18 @@ export const TaskDetailPage: React.FC = () => {
   const priorityStyle = PRIORITY_COLORS[task.priority];
 
   return (
-    <div className="max-w-3xl mx-auto space-y-6">
+    <div className="max-w-3xl mx-auto space-y-4 sm:space-y-6">
       <Link to="/tasks" className="inline-flex items-center text-xs text-[#4A7FA7] hover:text-[#B3CFE5] font-semibold">
         ← Back to Task Console
       </Link>
 
-      <div className="bg-[#1A3D63] border border-[#4A7FA7]/40 rounded-3xl p-8 shadow-2xl space-y-6">
-        <div className="flex items-center justify-between border-b border-[#0A1931] pb-6">
+      <div className="bg-[#1A3D63] border border-[#4A7FA7]/40 rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-2xl space-y-5 sm:space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#0A1931] pb-5 sm:pb-6">
           <div>
             <span className="text-xs font-mono text-[#B3CFE5]/60">TASK-#{task.id}</span>
-            <h1 className="text-2xl font-extrabold text-[#F6FAFD] mt-1">{task.title}</h1>
+            <h1 className="text-xl sm:text-2xl font-extrabold text-[#F6FAFD] mt-1 break-words">{task.title}</h1>
           </div>
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-2 sm:space-x-3 flex-wrap gap-y-2">
             <span className={`px-3 py-1 rounded-full text-xs font-semibold border ${statusStyle.bg} ${statusStyle.text} ${statusStyle.border}`}>
               {task.status}
             </span>
@@ -69,12 +69,12 @@ export const TaskDetailPage: React.FC = () => {
 
         <div>
           <h3 className="text-xs font-semibold uppercase tracking-wider text-[#B3CFE5]/80 mb-2">Description</h3>
-          <p className="text-[#B3CFE5] text-sm leading-relaxed bg-[#0A1931]/60 p-4 rounded-xl border border-[#4A7FA7]/30">
+          <p className="text-[#B3CFE5] text-xs sm:text-sm leading-relaxed bg-[#0A1931]/60 p-3.5 sm:p-4 rounded-xl border border-[#4A7FA7]/30 break-words">
             {task.description || 'No description provided for this task.'}
           </p>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-4 border-t border-[#0A1931] text-xs">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-[#0A1931] text-xs">
           <div>
             <span className="block text-[#B3CFE5]/70 font-medium">Due Date</span>
             <span className="text-[#F6FAFD] font-semibold mt-1 block">{formatDate(task.dueDate)}</span>
