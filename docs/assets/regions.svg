@@ -1,0 +1,151 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 170" width="100%">
+  <defs>
+    <linearGradient id="cardBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0c223f" />
+      <stop offset="100%" stop-color="#061325" />
+    </linearGradient>
+
+    <linearGradient id="primaryBorder" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#818cf8" stop-opacity="0.2" />
+    </linearGradient>
+
+    <style>
+      @keyframes radarWave {
+        0% { r: 4px; opacity: 1; }
+        100% { r: 16px; opacity: 0; }
+      }
+      @keyframes barGlow {
+        0%, 100% { opacity: 0.8; }
+        50% { opacity: 1; filter: drop-shadow(0 0 6px #38bdf8); }
+      }
+      .radar-ring {
+        animation: radarWave 2.4s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+        transform-origin: center;
+      }
+      .delay-1 { animation-delay: 0.6s; }
+      .delay-2 { animation-delay: 1.2s; }
+      .delay-3 { animation-delay: 1.8s; }
+      .region-name {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+        font-size: 13px;
+        font-weight: 700;
+        fill: #f8fafc;
+      }
+      .region-sub {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+        font-size: 10.5px;
+        fill: #94a3b8;
+      }
+      .metric-val {
+        font-family: 'SF Mono', Consolas, Monaco, monospace;
+        font-size: 11px;
+        font-weight: 600;
+        fill: #38bdf8;
+      }
+      .badge {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        font-size: 9.5px;
+        font-weight: 700;
+      }
+    </style>
+  </defs>
+
+  <!-- Container Box -->
+  <rect width="1000" height="170" rx="16" fill="#040c1a" stroke="#1e293b" stroke-width="1.2" />
+
+  <!-- Header line -->
+  <g transform="translate(24, 25)">
+    <circle cx="6" cy="6" r="4" fill="#38bdf8" />
+    <text x="18" y="10" fill="#e2e8f0" font-family="'Inter', sans-serif" font-size="12" font-weight="700" letter-spacing="1">LIVE GLOBAL REGIONAL CLUSTERS &amp; LATENCY TELEMETRY</text>
+    <text x="950" y="10" text-anchor="end" fill="#10b981" font-family="'Inter', sans-serif" font-size="11" font-weight="600">● 99.99% Uptime Consensus</text>
+  </g>
+
+  <!-- Region 1: ap-south-1 -->
+  <g transform="translate(24, 45)">
+    <rect width="222" height="102" rx="12" fill="url(#cardBg)" stroke="url(#primaryBorder)" stroke-width="1.5" />
+    <circle cx="28" cy="30" r="10" fill="#10b981" fill-opacity="0.15" />
+    <circle cx="28" cy="30" r="4" fill="#10b981" />
+    <circle cx="28" cy="30" r="4" fill="none" stroke="#10b981" stroke-width="1.5" class="radar-ring" />
+    
+    <text x="48" y="27" class="region-name">ap-south-1</text>
+    <text x="48" y="41" class="region-sub">Mumbai (Primary Active)</text>
+
+    <!-- Status pill -->
+    <rect x="154" y="18" width="56" height="18" rx="9" fill="#064e3b" />
+    <text x="182" y="30.5" text-anchor="middle" fill="#6ee7b7" class="badge">MASTER</text>
+
+    <!-- Metrics -->
+    <line x1="16" y1="58" x2="206" y2="58" stroke="#1e293b" stroke-width="1" />
+    <text x="16" y="78" class="region-sub">Latency</text>
+    <text x="206" y="78" text-anchor="end" class="metric-val">12 ms</text>
+    <text x="16" y="93" class="region-sub">Sync Mode</text>
+    <text x="206" y="93" text-anchor="end" fill="#a7f3d0" font-family="monospace" font-size="10.5">Read / Write</text>
+  </g>
+
+  <!-- Region 2: us-east-1 -->
+  <g transform="translate(268, 45)">
+    <rect width="222" height="102" rx="12" fill="url(#cardBg)" stroke="#1e3a5f" stroke-width="1.2" />
+    <circle cx="28" cy="30" r="10" fill="#38bdf8" fill-opacity="0.15" />
+    <circle cx="28" cy="30" r="4" fill="#38bdf8" />
+    <circle cx="28" cy="30" r="4" fill="none" stroke="#38bdf8" stroke-width="1.5" class="radar-ring delay-1" />
+
+    <text x="48" y="27" class="region-name">us-east-1</text>
+    <text x="48" y="41" class="region-sub">N. Virginia (Replica)</text>
+
+    <!-- Status pill -->
+    <rect x="146" y="18" width="64" height="18" rx="9" fill="#082f49" />
+    <text x="178" y="30.5" text-anchor="middle" fill="#7dd3fc" class="badge">HOT REPLICA</text>
+
+    <!-- Metrics -->
+    <line x1="16" y1="58" x2="206" y2="58" stroke="#1e293b" stroke-width="1" />
+    <text x="16" y="78" class="region-sub">Latency</text>
+    <text x="206" y="78" text-anchor="end" class="metric-val">46 ms</text>
+    <text x="16" y="93" class="region-sub">Sync Mode</text>
+    <text x="206" y="93" text-anchor="end" fill="#93c5fd" font-family="monospace" font-size="10.5">Async Replicated</text>
+  </g>
+
+  <!-- Region 3: eu-central-1 -->
+  <g transform="translate(512, 45)">
+    <rect width="222" height="102" rx="12" fill="url(#cardBg)" stroke="#1e3a5f" stroke-width="1.2" />
+    <circle cx="28" cy="30" r="10" fill="#818cf8" fill-opacity="0.15" />
+    <circle cx="28" cy="30" r="4" fill="#818cf8" />
+    <circle cx="28" cy="30" r="4" fill="none" stroke="#818cf8" stroke-width="1.5" class="radar-ring delay-2" />
+
+    <text x="48" y="27" class="region-name">eu-central-1</text>
+    <text x="48" y="41" class="region-sub">Frankfurt (Edge Node)</text>
+
+    <!-- Status pill -->
+    <rect x="148" y="18" width="62" height="18" rx="9" fill="#1e1b4b" />
+    <text x="179" y="30.5" text-anchor="middle" fill="#c7d2fe" class="badge">STANDBY</text>
+
+    <!-- Metrics -->
+    <line x1="16" y1="58" x2="206" y2="58" stroke="#1e293b" stroke-width="1" />
+    <text x="16" y="78" class="region-sub">Latency</text>
+    <text x="206" y="78" text-anchor="end" class="metric-val">68 ms</text>
+    <text x="16" y="93" class="region-sub">Sync Mode</text>
+    <text x="206" y="93" text-anchor="end" fill="#c7d2fe" font-family="monospace" font-size="10.5">Auto Failover</text>
+  </g>
+
+  <!-- Region 4: ap-northeast-1 -->
+  <g transform="translate(754, 45)">
+    <rect width="222" height="102" rx="12" fill="url(#cardBg)" stroke="#1e3a5f" stroke-width="1.2" />
+    <circle cx="28" cy="30" r="10" fill="#f43f5e" fill-opacity="0.15" />
+    <circle cx="28" cy="30" r="4" fill="#f43f5e" />
+    <circle cx="28" cy="30" r="4" fill="none" stroke="#f43f5e" stroke-width="1.5" class="radar-ring delay-3" />
+
+    <text x="48" y="27" class="region-name">ap-northeast-1</text>
+    <text x="48" y="41" class="region-sub">Tokyo (Edge Node)</text>
+
+    <!-- Status pill -->
+    <rect x="156" y="18" width="54" height="18" rx="9" fill="#4c0519" />
+    <text x="183" y="30.5" text-anchor="middle" fill="#fecdd3" class="badge">ACTIVE</text>
+
+    <!-- Metrics -->
+    <line x1="16" y1="58" x2="206" y2="58" stroke="#1e293b" stroke-width="1" />
+    <text x="16" y="78" class="region-sub">Latency</text>
+    <text x="206" y="78" text-anchor="end" class="metric-val">82 ms</text>
+    <text x="16" y="93" class="region-sub">Sync Mode</text>
+    <text x="206" y="93" text-anchor="end" fill="#fecdd3" font-family="monospace" font-size="10.5">Cross-Replication</text>
+  </g>
+</svg>

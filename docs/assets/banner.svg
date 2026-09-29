@@ -1,0 +1,232 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#040b17" />
+      <stop offset="45%" stop-color="#081b33" />
+      <stop offset="85%" stop-color="#0c2344" />
+      <stop offset="100%" stop-color="#050e1d" />
+    </linearGradient>
+
+    <!-- Accent Gradients -->
+    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="35%" stop-color="#818cf8" />
+      <stop offset="70%" stop-color="#c084fc" />
+      <stop offset="100%" stop-color="#38bdf8">
+        <animate attributeName="stop-color" 
+          values="#38bdf8;#818cf8;#c084fc;#38bdf8" 
+          dur="8s" repeatCount="indefinite" />
+      </stop>
+    </linearGradient>
+
+    <linearGradient id="cyanGlow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00f2fe" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#4facfe" stop-opacity="0.8" />
+    </linearGradient>
+
+    <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0" />
+      <stop offset="50%" stop-color="#38bdf8" stop-opacity="0.7" />
+      <stop offset="100%" stop-color="#818cf8" stop-opacity="0" />
+    </linearGradient>
+
+    <!-- Filter for neon glows -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <style>
+      @keyframes pulse {
+        0%, 100% { opacity: 0.3; transform: scale(1); }
+        50% { opacity: 0.9; transform: scale(1.08); }
+      }
+      @keyframes floatBeam {
+        0% { stroke-dashoffset: 600; }
+        100% { stroke-dashoffset: 0; }
+      }
+      @keyframes blink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.25; }
+      }
+      @keyframes scanline {
+        0% { transform: translateY(-100%); }
+        100% { transform: translateY(360px); }
+      }
+      @keyframes orbit {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      .node-pulse {
+        animation: pulse 3s ease-in-out infinite;
+        transform-origin: center;
+      }
+      .beam {
+        stroke-dasharray: 80 160;
+        animation: floatBeam 4s linear infinite;
+      }
+      .beam-fast {
+        stroke-dasharray: 40 120;
+        animation: floatBeam 2.5s linear infinite;
+      }
+      .status-dot {
+        animation: blink 2s ease-in-out infinite;
+      }
+      .title-text {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Inter', sans-serif;
+        font-weight: 900;
+        letter-spacing: -0.5px;
+      }
+      .badge-text {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Inter', monospace;
+        font-weight: 600;
+        letter-spacing: 1.5px;
+      }
+      .sub-text {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Inter', sans-serif;
+        font-weight: 400;
+      }
+    </style>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="1200" height="360" rx="20" fill="url(#bgGrad)" />
+
+  <!-- Outer Glass Border -->
+  <rect width="1198" height="358" x="1" y="1" rx="19" fill="none" stroke="#38bdf8" stroke-opacity="0.25" stroke-width="1.5" />
+
+  <!-- Futuristic Subtle Tech Grid -->
+  <g opacity="0.08" stroke="#38bdf8" stroke-width="1">
+    <line x1="100" y1="0" x2="100" y2="360" />
+    <line x1="250" y1="0" x2="250" y2="360" />
+    <line x1="400" y1="0" x2="400" y2="360" />
+    <line x1="550" y1="0" x2="550" y2="360" />
+    <line x1="700" y1="0" x2="700" y2="360" />
+    <line x1="850" y1="0" x2="850" y2="360" />
+    <line x1="1000" y1="0" x2="1000" y2="360" />
+    <line x1="1150" y1="0" x2="1150" y2="360" />
+
+    <line x1="0" y1="60" x2="1200" y2="60" />
+    <line x1="0" y1="120" x2="1200" y2="120" />
+    <line x1="0" y1="180" x2="1200" y2="180" />
+    <line x1="0" y1="240" x2="1200" y2="240" />
+    <line x1="0" y1="300" x2="1200" y2="300" />
+  </g>
+
+  <!-- Glowing Orb Backdrops -->
+  <circle cx="200" cy="180" r="160" fill="#0284c7" opacity="0.12" filter="url(#glow)" />
+  <circle cx="1020" cy="160" r="180" fill="#6366f1" opacity="0.12" filter="url(#glow)" />
+  <circle cx="600" cy="180" r="220" fill="#0ea5e9" opacity="0.08" filter="url(#glow)" />
+
+  <!-- Animated Cross-Region Telemetry Lines (Right Side Constellation) -->
+  <g opacity="0.85">
+    <!-- Static Connecting Bus -->
+    <path d="M 720 180 Q 860 100 950 140 T 1110 110" fill="none" stroke="#1e293b" stroke-width="2.5" />
+    <path d="M 780 260 Q 920 280 1020 200 T 1120 230" fill="none" stroke="#1e293b" stroke-width="2.5" />
+    <path d="M 950 140 L 1020 200" fill="none" stroke="#1e293b" stroke-width="2.5" />
+
+    <!-- Pulsing Signal Waves (Animated Beams) -->
+    <path d="M 720 180 Q 860 100 950 140 T 1110 110" fill="none" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" class="beam" filter="url(#softGlow)" />
+    <path d="M 780 260 Q 920 280 1020 200 T 1120 230" fill="none" stroke="#818cf8" stroke-width="3" stroke-linecap="round" class="beam-fast" filter="url(#softGlow)" />
+    <path d="M 950 140 L 1020 200" fill="none" stroke="#34d399" stroke-width="2.5" stroke-linecap="round" class="beam" />
+
+    <!-- Node 1: US-East (Virginia) -->
+    <g transform="translate(950, 140)">
+      <circle r="22" fill="#38bdf8" fill-opacity="0.15" class="node-pulse" />
+      <circle r="12" fill="#082f49" stroke="#38bdf8" stroke-width="2.5" />
+      <circle r="4" fill="#38bdf8" filter="url(#softGlow)" />
+      <text x="0" y="32" text-anchor="middle" fill="#94a3b8" font-size="11" font-family="'Inter', sans-serif" font-weight="600">us-east-1</text>
+    </g>
+
+    <!-- Node 2: EU-Central (Frankfurt) -->
+    <g transform="translate(1020, 200)">
+      <circle r="24" fill="#818cf8" fill-opacity="0.15" class="node-pulse" style="animation-delay: -1s;" />
+      <circle r="13" fill="#1e1b4b" stroke="#818cf8" stroke-width="2.5" />
+      <circle r="4" fill="#a5b4fc" filter="url(#softGlow)" />
+      <text x="0" y="34" text-anchor="middle" fill="#94a3b8" font-size="11" font-family="'Inter', sans-serif" font-weight="600">eu-central-1</text>
+    </g>
+
+    <!-- Node 3: AP-South (Mumbai) -->
+    <g transform="translate(1110, 110)">
+      <circle r="20" fill="#34d399" fill-opacity="0.15" class="node-pulse" style="animation-delay: -2s;" />
+      <circle r="11" fill="#064e3b" stroke="#34d399" stroke-width="2" />
+      <circle r="4" fill="#6ee7b7" filter="url(#softGlow)" />
+      <text x="0" y="-18" text-anchor="middle" fill="#94a3b8" font-size="11" font-family="'Inter', sans-serif" font-weight="600">ap-south-1</text>
+    </g>
+
+    <!-- Node 4: AP-East (Tokyo) -->
+    <g transform="translate(1120, 230)">
+      <circle r="18" fill="#f43f5e" fill-opacity="0.15" class="node-pulse" style="animation-delay: -1.5s;" />
+      <circle r="10" fill="#4c0519" stroke="#f43f5e" stroke-width="2" />
+      <circle r="3.5" fill="#fda4af" filter="url(#softGlow)" />
+      <text x="0" y="28" text-anchor="middle" fill="#94a3b8" font-size="11" font-family="'Inter', sans-serif" font-weight="600">ap-northeast-1</text>
+    </g>
+  </g>
+
+  <!-- Left Content Area -->
+  <g transform="translate(70, 70)">
+    <!-- Pill Badge -->
+    <rect width="270" height="30" rx="15" fill="#0f2b48" stroke="#38bdf8" stroke-opacity="0.4" stroke-width="1.2" />
+    <circle cx="18" cy="15" r="4.5" fill="#10b981" class="status-dot" filter="url(#softGlow)" />
+    <text x="32" y="19" fill="#7dd3fc" font-size="11" class="badge-text">ACTIVE-ACTIVE GEO CLUSTER</text>
+    
+    <!-- Main Title -->
+    <text x="0" y="86" fill="url(#textGrad)" font-size="46" class="title-text" filter="url(#softGlow)">
+      Multi-Region Task Manager
+    </text>
+
+    <!-- Subtitle / Tagline -->
+    <text x="2" y="128" fill="#94a3b8" font-size="17" class="sub-text">
+      Next-Generation Distributed Orchestration • Low Latency Task Dispatching
+    </text>
+    <text x="2" y="152" fill="#64748b" font-size="14" class="sub-text">
+      Automated Regional Failover • Real-Time Consensus • Enterprise Resiliency
+    </text>
+
+    <!-- Feature Quick Pills -->
+    <g transform="translate(0, 185)">
+      <!-- Pill 1: Spring Boot 3 -->
+      <g transform="translate(0, 0)">
+        <rect width="145" height="34" rx="8" fill="#091a30" stroke="#334155" stroke-width="1" />
+        <circle cx="18" cy="17" r="4" fill="#38bdf8" />
+        <text x="32" y="21" fill="#e2e8f0" font-size="12" font-family="'Inter', sans-serif" font-weight="600">Spring Boot 3.2</text>
+      </g>
+
+      <!-- Pill 2: React 18 & Vite -->
+      <g transform="translate(155, 0)">
+        <rect width="135" height="34" rx="8" fill="#091a30" stroke="#334155" stroke-width="1" />
+        <circle cx="18" cy="17" r="4" fill="#61dafb" />
+        <text x="32" y="21" fill="#e2e8f0" font-size="12" font-family="'Inter', sans-serif" font-weight="600">React + Vite</text>
+      </g>
+
+      <!-- Pill 3: Docker & CI/CD -->
+      <g transform="translate(300, 0)">
+        <rect width="145" height="34" rx="8" fill="#091a30" stroke="#334155" stroke-width="1" />
+        <circle cx="18" cy="17" r="4" fill="#818cf8" />
+        <text x="32" y="21" fill="#e2e8f0" font-size="12" font-family="'Inter', sans-serif" font-weight="600">Docker &amp; Jenkins</text>
+      </g>
+
+      <!-- Pill 4: MySQL 8.4 Cluster -->
+      <g transform="translate(455, 0)">
+        <rect width="135" height="34" rx="8" fill="#091a30" stroke="#334155" stroke-width="1" />
+        <circle cx="18" cy="17" r="4" fill="#34d399" />
+        <text x="32" y="21" fill="#e2e8f0" font-size="12" font-family="'Inter', sans-serif" font-weight="600">MySQL Cluster</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Bottom Accent Gradient Line -->
+  <rect x="0" y="356" width="1200" height="4" fill="url(#cyanGlow)" />
+</svg>
