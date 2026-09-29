@@ -116,7 +116,7 @@ flowchart TB
         ExternalAPI["📱 Third-Party Microservices / Webhooks"]
     end
 
-    subgraph Edge[" ⚡ Edge & Ingress Layer "]
+    subgraph Edge[" ⚡ Edge and Ingress Layer "]
         DNS["🌍 Geo-DNS / Cloud Router"]
         Gateway["🛡️ Reverse Proxy / Load Balancer<br/>(Port :5173 / :80)"]
     end
@@ -124,7 +124,7 @@ flowchart TB
     subgraph PrimaryRegion[" 🇮🇳 Primary Region: ap-south-1 (Mumbai) "]
         direction TB
         App1["☕ Spring Boot 3 Service<br/>(:8080/api/v1)"]
-        Actuator1["🩺 Actuator &amp; Health Probe"]
+        Actuator1["🩺 Actuator and Health Probe"]
         DB1[("🗄️ MySQL 8.4 Primary<br/>(Port :3306)")]
         App1 --- DB1
         App1 -.-> Actuator1
@@ -133,13 +133,13 @@ flowchart TB
     subgraph ReplicaRegion[" 🇺🇸 Replica Region: us-east-1 (N. Virginia) "]
         direction TB
         App2["☕ Spring Boot 3 Standby<br/>(:8080/api/v1)"]
-        Actuator2["🩺 Actuator &amp; Health Probe"]
+        Actuator2["🩺 Actuator and Health Probe"]
         DB2[("🗄️ MySQL 8.4 Replica")]
         App2 --- DB2
         App2 -.-> Actuator2
     end
 
-    subgraph Pipeline[" 🛠️ Continuous Integration & Delivery "]
+    subgraph Pipeline[" 🛠️ Continuous Integration and Delivery "]
         Jenkins["🔨 Jenkins Pipeline"]
         DockerEngine["🐳 Docker Compose Engine"]
         Jenkins ==> DockerEngine
@@ -148,11 +148,11 @@ flowchart TB
     Browser --> DNS
     ExternalAPI --> DNS
     DNS --> Gateway
-    Gateway -->|Optimal Route (Latency &lt; 20ms)| App1
-    Gateway -.->|Failover Traffic Route| App2
-    DB1 <===>|Cross-Region Async Sync| DB2
-    DockerEngine -.->|Deploys &amp; Monitors| PrimaryRegion
-    DockerEngine -.->|Deploys &amp; Monitors| ReplicaRegion
+    Gateway -->|"Primary Route (Latency sub-20ms)"| App1
+    Gateway -.->|"Failover Traffic Route"| App2
+    DB1 <-->|"Cross-Region Async Sync"| DB2
+    DockerEngine -.->|"Deploys and Monitors"| PrimaryRegion
+    DockerEngine -.->|"Deploys and Monitors"| ReplicaRegion
 
     classDef client fill:#082f49,stroke:#38bdf8,stroke-width:1.5px,color:#f8fafc;
     classDef edge fill:#1e1b4b,stroke:#818cf8,stroke-width:1.5px,color:#f8fafc;
